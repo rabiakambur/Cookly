@@ -2,8 +2,8 @@ package com.rabiakambur.cookly.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rabiakambur.cookly.data.network.ApiClient
-import com.rabiakambur.cookly.model.RecipesResultResponse
+import com.rabiakambur.cookly.home.data.source.remote.HomeClient
+import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResultResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class HomeViewModel : ViewModel() {
 
     private fun fetchRecipes() {
         viewModelScope.launch {
-            val recipes = ApiClient.retrofit.getRecipes()
+            val recipes = HomeClient.retrofit.getRecipes()
             _recipesListFlow.value = recipes.results
         }
     }

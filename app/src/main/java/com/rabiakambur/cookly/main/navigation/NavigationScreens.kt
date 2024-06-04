@@ -1,4 +1,4 @@
-package com.rabiakambur.cookly.main
+package com.rabiakambur.cookly.main.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.rabiakambur.cookly.favorite.ui.FavoriteScreen
 import com.rabiakambur.cookly.home.ui.HomeScreen
-import com.rabiakambur.cookly.navigation.NavItem
 
 @Composable
 fun NavigationScreens(

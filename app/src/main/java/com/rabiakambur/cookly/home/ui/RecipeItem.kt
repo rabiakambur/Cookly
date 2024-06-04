@@ -19,11 +19,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.rabiakambur.cookly.model.RecipesResultResponse
-import com.rabiakambur.cookly.ui.theme.CardColor
+import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResultResponse
+import com.rabiakambur.cookly.main.theme.CardColor
 
 @Composable
-fun ItemRecipeList(recipesResultResponse: RecipesResultResponse) {
+fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
 
     Card(
         modifier = Modifier

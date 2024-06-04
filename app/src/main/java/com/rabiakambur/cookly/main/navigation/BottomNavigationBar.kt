@@ -1,4 +1,4 @@
-package com.rabiakambur.cookly.main
+package com.rabiakambur.cookly.main.navigation
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -9,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
-import com.rabiakambur.cookly.navigation.NavItem
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {

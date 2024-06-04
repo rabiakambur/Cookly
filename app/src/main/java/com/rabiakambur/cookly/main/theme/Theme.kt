@@ -1,4 +1,4 @@
-package com.rabiakambur.cookly.ui.theme
+package com.rabiakambur.cookly.main.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.rabiakambur.cookly.navigation
+package com.rabiakambur.cookly.main.navigation
 
 object NavTitle {
     const val HOME = "Home"

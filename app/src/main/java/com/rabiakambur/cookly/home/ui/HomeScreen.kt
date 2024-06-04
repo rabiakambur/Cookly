@@ -22,7 +22,7 @@ fun HomeScreen() {
         contentPadding = PaddingValues(8.dp),
         content = {
             items(data) {
-                ItemRecipeList(it)
+                RecipeItem(it)
             }
         }
     )

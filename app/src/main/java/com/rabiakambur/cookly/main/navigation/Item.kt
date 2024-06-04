@@ -1,4 +1,4 @@
-package com.rabiakambur.cookly.navigation
+package com.rabiakambur.cookly.main.navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
