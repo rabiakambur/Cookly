@@ -1,28 +1,29 @@
-package com.rabiakambur.cookly.main
+package com.rabiakambur.cookly.main.navigation
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.rabiakambur.cookly.navigation.NavItem
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val navItems = listOf(NavItem.Home, NavItem.Favorite)
     var selectedItem by rememberSaveable { mutableStateOf(0) }
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.White,
+        contentColor = Color.Black
+    ) {
         navItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = true,
                 icon = { Icon(item.icon, contentDescription = item.title) },
-                label = { Text(item.title) },
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
