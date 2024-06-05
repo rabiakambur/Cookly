@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.0-alpha04"
+org-jetbrains-kotlin-android = "1.9.0"
 kotlin = "1.9.22"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -14,6 +15,7 @@ okhttp_version = "4.11.0"
 coil_version = "2.6.0"
 room_version = "2.6.1"
 ksp_version = "1.9.22-1.0.17"
+dagger_version = "2.44"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,8 +40,12 @@ coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil_versio
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger_version"}
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp_version" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "org-jetbrains-kotlin-android" }
+dagger = { id = "com.google.dagger.hilt.android", version.ref = "dagger_version"}
