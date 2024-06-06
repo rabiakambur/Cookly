@@ -35,7 +35,10 @@ fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
             .fillMaxWidth()
             .padding(all = 7.dp),
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
-        border = BorderStroke(2.dp, Color.Transparent)
+        border = BorderStroke(2.dp, Color.Transparent),
+        onClick = {
+
+        }
     ) {
         Box {
             Column {
@@ -83,7 +86,7 @@ fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun FooterPreview() {
+private fun RecipeItemPreview() {
     RecipeItem(
         recipesResultResponse = RecipesResultResponse(
             "1",

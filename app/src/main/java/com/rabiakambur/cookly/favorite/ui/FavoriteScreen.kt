@@ -1,22 +1,22 @@
 package com.rabiakambur.cookly.favorite.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.rabiakambur.cookly.main.theme.BackgroundColor
 
 @Composable
 fun FavoriteScreen() {
 
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .fillMaxSize()
+            .background(BackgroundColor)
     ) {
-        Text("Favorite")
+        items(3) {
+            FavoriteItem()
+        }
     }
 }

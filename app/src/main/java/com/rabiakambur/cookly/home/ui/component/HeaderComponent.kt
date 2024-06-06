@@ -62,6 +62,6 @@ fun HeaderComponent() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun FooterPreview() {
+private fun HeaderComponentPreview() {
     HeaderComponent()
 }
