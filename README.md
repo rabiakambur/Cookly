@@ -8,13 +8,12 @@
 </p>
 
 <p align="center">
-Cookly, kullanıcıların farklı kategorilerde tariflere göz atabileceği, tariflerle ilgili detaylı bilgilere erişebileceği, favori tariflerine internetsiz de erişebileceği bir yemek tarifi uygulamasıdır.
-  <br />
+Cookly is a recipe application where users can browse recipes in different categories, get detailed information about recipes, and access their favorite recipes without being connected to the internet.  <br />
 </p>
 
-## Proje Hakkında
+## Introduction
 
-#### Kullanılan Teknolojiler
+#### Dependencies Used
 * [Jetpack Compose](https://developer.android.com/develop/ui/compose)
 * [MVVM](https://developer.android.com/topic/libraries/architecture/viewmodel#implement)
 * [Retrofit](https://square.github.io/retrofit/)
@@ -27,3 +26,12 @@ Cookly, kullanıcıların farklı kategorilerde tariflere göz atabileceği, tar
 
 #### API
 * _https://api.spoonacular.com_
+
+## Get Started
+1. Clone this repository to your preferred directory using the following command:
+ 
+```
+git clone https://github.com/rabiakambur/papara-bootcamp-final-case.git
+```
+3. Open the cloned project in Android Studio.
+4. Build and run the app on an emulator or a physical device.
