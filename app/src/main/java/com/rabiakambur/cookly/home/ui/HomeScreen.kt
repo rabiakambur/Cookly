@@ -11,16 +11,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rabiakambur.cookly.home.ui.component.HeaderComponent
 import com.rabiakambur.cookly.main.theme.BackgroundColor
 
 @Composable
-fun HomeScreen() {
-
-    val viewModel: HomeViewModel = viewModel()
-
-    val data by viewModel.recipesListFlow.collectAsState()
+fun HomeScreen(
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
+    val data by homeViewModel.recipesListFlow.collectAsState()
 
     Column {
         HeaderComponent()
