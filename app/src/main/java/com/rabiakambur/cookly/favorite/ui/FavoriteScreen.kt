@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.rabiakambur.cookly.favorite.data.source.local.RecipeEntity
 import com.rabiakambur.cookly.main.theme.BackgroundColor
 
 @Composable
@@ -17,18 +19,39 @@ fun FavoriteScreen(
 ) {
     val state by favoriteViewModel.state.collectAsState()
 
+    FavoriteRecipesList(state.favoriteList) { recipe ->
+        favoriteViewModel.deleteFavoriteRecipe(recipe)
+    }
+}
+
+@Composable
+fun FavoriteRecipesList(
+    favoriteList: List<RecipeEntity>,
+    onDeleteClick: (RecipeEntity) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
     ) {
-        items(state.favoriteList) { recipe ->
+        items(favoriteList) { recipe ->
             FavoriteItem(
                 favoriteRecipe = recipe,
                 onDeleteClick = {
-                    favoriteViewModel.deleteFavoriteRecipe(recipe)
+                    onDeleteClick.invoke(recipe)
                 }
             )
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun FavoriteScreenPreview() {
+    FavoriteRecipesList(favoriteList = listOf(
+        RecipeEntity(
+        uid = 1, name = "çorba", image = "https://img.spoonacular.com/recipes/715415-312x231.jpg", isFavorite = true
+    ))){
+
     }
 }
