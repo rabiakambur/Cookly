@@ -15,7 +15,8 @@ okhttp_version = "4.11.0"
 coil_version = "2.6.0"
 room_version = "2.6.1"
 ksp_version = "1.9.22-1.0.17"
-dagger_version = "2.44"
+dagger_version = "2.49"
+hilt_version = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger_version"}
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger_version"}
+hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

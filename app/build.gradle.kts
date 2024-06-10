@@ -88,5 +88,6 @@ dependencies {
 
     // dagger hilt
     implementation(libs.dagger.hilt)
+    implementation(libs.hilt.compose)
     kapt(libs.dagger.hilt.compiler)
 }
