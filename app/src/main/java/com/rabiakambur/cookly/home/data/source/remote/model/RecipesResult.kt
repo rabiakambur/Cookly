@@ -19,11 +19,8 @@ data class RecipesResult(
     val recipeServings: Int,
 
     @SerializedName("dishTypes")
-    val dishTypes: String,
+    val dishTypes: List<String>,
 
-    @SerializedName("step")
-    val recipeStep: String,
-
-    @SerializedName("ingredients")
-    val recipeIngredients: String,
+    @SerializedName("analyzedInstructions")
+    val analyzedInstructions: List<AnalyzedInstructionsResponse>
 )

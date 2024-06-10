@@ -130,9 +130,8 @@ private fun RecipeItemPreview() {
             recipeImage = "https://img.spoonacular.com/recipes/716406-312x231.jpg",
             recipeReadyInMinutes = 5,
             recipeServings = 8,
-            dishTypes = "meal",
-            recipeStep = "Add peas (the heat of the soup will quickly thaw them) and puree until smooth; add more until it reaches the thickness you like.Top with chives and a small dollop of creme fraiche or sour cream or greek yogurt.",
-            recipeIngredients = "salt and pepper, asparagus, broth, red pepper flakes"
+            dishTypes = listOf("meal"),
+            analyzedInstructions = listOf()
         )
     )
 }
