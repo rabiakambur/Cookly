@@ -35,14 +35,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rabiakambur.cookly.favorite.data.source.local.RecipeEntity
+import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.main.theme.BackgroundColor
 import com.rabiakambur.cookly.main.theme.PrimaryColor
 
 @Composable
 fun ExpandableCard(
-    favoriteRecipe: RecipeEntity,
-    onDeleteClick: (RecipeEntity) -> Unit
+    favoriteRecipe: FavoriteRecipeEntity,
+    onDeleteClick: (FavoriteRecipeEntity) -> Unit
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(

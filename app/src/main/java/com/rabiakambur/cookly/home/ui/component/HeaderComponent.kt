@@ -32,8 +32,8 @@ fun HeaderComponent() {
         shape = RoundedCornerShape(
             topStart = 0.dp,
             topEnd = 0.dp,
-            bottomStart = 15.dp,
-            bottomEnd = 15.dp
+            bottomStart = 14.dp,
+            bottomEnd = 14.dp
         ),
         border = BorderStroke(2.dp, Color.Transparent),
         colors = CardDefaults.cardColors(
@@ -53,7 +53,7 @@ fun HeaderComponent() {
                 fontFamily = FontFamily.Monospace,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier
-                    .padding(top = 25.dp, bottom = 20.dp)
+                    .padding(top = 24.dp, bottom = 20.dp)
             )
             SearchComponent()
         }

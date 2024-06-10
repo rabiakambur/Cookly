@@ -2,8 +2,9 @@ package com.rabiakambur.cookly.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
-import com.rabiakambur.cookly.home.data.source.remote.repository.HomeRepository
+import com.rabiakambur.cookly.home.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +36,21 @@ class HomeViewModel @Inject constructor(
                     _recipesListFlow.value = it.results
                 }
                 .launchIn(viewModelScope)
+        }
+    }
+
+    fun addRecipeToFavorite(recipesResult: RecipesResult) {
+        viewModelScope.launch {
+            homeRepository.addRecipeToFavorite(favoriteRecipeEntity = FavoriteRecipeEntity(
+                uid = 0,
+                recipeImage = recipesResult.recipeImage,
+                recipeTitle = recipesResult.recipeTitle,
+                readyInMinutes = recipesResult.recipeReadyInMinutes,
+                recipeServings = recipesResult.recipeServings,
+                dishTypes = recipesResult.dishTypes,
+                instructions = recipesResult.analyzedInstructions
+            )
+            )
         }
     }
 }

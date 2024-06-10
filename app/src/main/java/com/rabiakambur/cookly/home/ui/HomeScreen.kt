@@ -30,7 +30,9 @@ fun HomeScreen(
             modifier = Modifier.background(BackgroundColor),
             content = {
                 items(data) {
-                    RecipeItem(it)
+                    RecipeItem(it) { recipe ->
+                        homeViewModel.addRecipeToFavorite(recipe)
+                    }
                 }
             }
         )

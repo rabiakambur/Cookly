@@ -2,6 +2,7 @@ package com.rabiakambur.cookly.home.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,7 +40,10 @@ import coil.compose.AsyncImage
 import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 
 @Composable
-fun RecipeItem(recipesResultResponse: RecipesResult) {
+fun RecipeItem(
+    recipesResultResponse: RecipesResult,
+    onFavoriteClick: (RecipesResult) -> Unit
+) {
 
     var isFavorite by remember { mutableStateOf(false) }
     Card(
@@ -86,6 +90,13 @@ fun RecipeItem(recipesResultResponse: RecipesResult) {
                             .padding(top = 10.dp, end = 10.dp)
                     ) {
                         Icon(
+                            modifier = Modifier
+                                .clickable {
+                                    if (!isFavorite) {
+                                        onFavoriteClick.invoke(recipesResultResponse)
+                                    }
+                                    isFavorite = !isFavorite
+                                },
                             tint = Color.Red,
                             imageVector = if (isFavorite) {
                                 Icons.Default.Favorite
@@ -132,6 +143,8 @@ private fun RecipeItemPreview() {
             recipeServings = 8,
             dishTypes = listOf("meal"),
             analyzedInstructions = listOf()
-        )
+        ), {
+
+        }
     )
 }

@@ -9,20 +9,14 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface RecipeDao {
+interface FavoriteDao {
 
     @Query("SELECT * FROM recipes")
-    fun getAllRecipes(): Flow<List<RecipeEntity>>
-
-    @Query("SELECT * FROM recipes WHERE isFavorite = 1")
-    fun getFavoriteRecipes(): Flow<List<RecipeEntity>>
+    fun getFavoriteRecipes(): Flow<List<FavoriteRecipeEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipe(recipeEntity: RecipeEntity)
-
-    @Update
-    suspend fun updateRecipe(recipeEntity: RecipeEntity)
+    suspend fun insertRecipe(favoriteRecipeEntity: FavoriteRecipeEntity)
 
     @Delete
-    suspend fun deleteRecipe(recipeEntity: RecipeEntity)
+    suspend fun deleteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity)
 }
