@@ -36,10 +36,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResultResponse
+import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 
 @Composable
-fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
+fun RecipeItem(recipesResultResponse: RecipesResult) {
 
     var isFavorite by remember { mutableStateOf(false) }
     Card(
@@ -124,7 +124,7 @@ fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
 @Composable
 private fun RecipeItemPreview() {
     RecipeItem(
-        recipesResultResponse = RecipesResultResponse(
+        recipesResultResponse = RecipesResult(
             "1",
             "mercimek",
             "https://img.spoonacular.com/recipes/715415-312x231.jpg"

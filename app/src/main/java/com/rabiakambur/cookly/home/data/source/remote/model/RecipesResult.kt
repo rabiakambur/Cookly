@@ -2,7 +2,7 @@ package com.rabiakambur.cookly.home.data.source.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RecipesResultResponse(
+data class RecipesResult(
     @SerializedName("id")
     val recipeId: String,
 
