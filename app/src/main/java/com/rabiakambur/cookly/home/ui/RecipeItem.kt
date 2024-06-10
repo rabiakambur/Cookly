@@ -7,12 +7,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -30,6 +40,8 @@ import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResultRespons
 
 @Composable
 fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
+
+    var isFavorite by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,25 +54,49 @@ fun RecipeItem(recipesResultResponse: RecipesResultResponse) {
     ) {
         Box {
             Column {
-                AsyncImage(
-                    model = recipesResultResponse.recipeImage,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .height(180.dp)
-                        .fillMaxWidth()
-                        .drawWithCache {
-                            val gradient = Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, Color.White),
-                                startY = size.height / 2,
-                                endY = size.height
-                            )
-                            onDrawWithContent {
-                                drawContent()
-                                drawRect(gradient)
+                Box {
+                    AsyncImage(
+                        model = recipesResultResponse.recipeImage,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(180.dp)
+                            .fillMaxWidth()
+                            .drawWithCache {
+                                val gradient = Brush.verticalGradient(
+                                    colors = listOf(Color.Transparent, Color.White),
+                                    startY = size.height / 2,
+                                    endY = size.height
+                                )
+                                onDrawWithContent {
+                                    drawContent()
+                                    drawRect(gradient)
+                                }
                             }
-                        }
-                )
+                    )
+
+                    IconToggleButton(
+                        checked = isFavorite,
+                        onCheckedChange = {
+                            isFavorite = !isFavorite
+                        },
+                        modifier = Modifier
+                            .size(34.dp)
+                            .align(Alignment.TopEnd)
+                            .padding(top = 10.dp, end = 10.dp)
+                    ) {
+                        Icon(
+                            tint = Color.Red,
+                            imageVector = if (isFavorite) {
+                                Icons.Default.Favorite
+                            } else {
+                                Icons.Default.FavoriteBorder
+                            },
+                            contentDescription = null
+                        )
+                    }
+                }
+
                 Box(
                     modifier = Modifier
                         .background(Color.White)

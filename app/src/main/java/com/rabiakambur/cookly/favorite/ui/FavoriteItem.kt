@@ -14,13 +14,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rabiakambur.cookly.favorite.data.source.local.RecipeEntity
 import com.rabiakambur.cookly.main.theme.BackgroundColor
 
 @Composable
-fun FavoriteItem() {
+fun FavoriteItem(
+    favoriteRecipe: RecipeEntity,
+    onDeleteClick: (RecipeEntity) -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp)
@@ -42,18 +45,12 @@ fun FavoriteItem() {
             modifier = Modifier
                 .padding(10.dp)
         ) {
-                Text(
-                    text = "sdfsdfsdfsdfsdfsdfsdfsdflksflsdkşflsdkfşlksdşlfkşsdlkfşl",
-                    textAlign = TextAlign.Justify,
-                    fontSize = 13.sp,
-                    color = Color.Black
-                )
+            Text(
+                text = "sdfsdfsdfsdfsdfsdfsdfsdflksflsdkşflsdkfşlksdşlfkşsdlkfşl",
+                textAlign = TextAlign.Justify,
+                fontSize = 13.sp,
+                color = Color.Black
+            )
         }
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun FavoriteItemPreview() {
-    FavoriteItem()
 }
