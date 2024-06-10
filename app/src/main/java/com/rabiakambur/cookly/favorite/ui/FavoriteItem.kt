@@ -29,13 +29,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.rabiakambur.cookly.favorite.data.source.local.RecipeEntity
+import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.main.theme.CardColor
 
 @Composable
 fun FavoriteItem(
-    favoriteRecipe: RecipeEntity,
-    onDeleteClick: (RecipeEntity) -> Unit
+    favoriteRecipe: FavoriteRecipeEntity,
+    onDeleteClick: (FavoriteRecipeEntity) -> Unit
 ) {
     var shouldShowItemDeletionDialog by remember { mutableStateOf(false) }
 
@@ -81,7 +81,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = favoriteRecipe.recipeIngredients,
+                    text = favoriteRecipe.instructions.first().steps.mapNotNull { it.recipeIngredients.firstOrNull() }.map { it.name }.joinToString("\n"),
                     textAlign = TextAlign.Justify,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -98,7 +98,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = favoriteRecipe.recipeStep,
+                    text = favoriteRecipe.instructions.first().steps.map { it.recipeStep }.joinToString("\n"),
                     textAlign = TextAlign.Justify,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -134,16 +134,14 @@ fun FavoriteItem(
 @Composable
 private fun FavoriteItemPreview() {
     FavoriteItem(
-        favoriteRecipe = RecipeEntity(
+        favoriteRecipe = FavoriteRecipeEntity(
             uid = 1,
             recipeTitle = "Asparagus and Pea Soup: Real Convenience Food",
             recipeImage = "https://img.spoonacular.com/recipes/716406-312x231.jpg",
             readyInMinutes = 5,
             recipeServings = 8,
-            dishTypes = "meal",
-            recipeStep = "Add peas (the heat of the soup will quickly thaw them) and puree until smooth; add more until it reaches the thickness you like.Top with chives and a small dollop of creme fraiche or sour cream or greek yogurt.",
-            recipeIngredients = "salt and pepper, asparagus, broth, red pepper flakes",
-            isFavorite = true
+            dishTypes = listOf("Meal"),
+            instructions = listOf()
         ),
         onDeleteClick = {
 
