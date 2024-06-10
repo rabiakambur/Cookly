@@ -125,9 +125,14 @@ fun RecipeItem(recipesResultResponse: RecipesResult) {
 private fun RecipeItemPreview() {
     RecipeItem(
         recipesResultResponse = RecipesResult(
-            "1",
-            "mercimek",
-            "https://img.spoonacular.com/recipes/715415-312x231.jpg"
+            recipeId = "1",
+            recipeTitle = "Asparagus and Pea Soup: Real Convenience Food",
+            recipeImage = "https://img.spoonacular.com/recipes/716406-312x231.jpg",
+            recipeReadyInMinutes = 5,
+            recipeServings = 8,
+            dishTypes = "meal",
+            recipeStep = "Add peas (the heat of the soup will quickly thaw them) and puree until smooth; add more until it reaches the thickness you like.Top with chives and a small dollop of creme fraiche or sour cream or greek yogurt.",
+            recipeIngredients = "salt and pepper, asparagus, broth, red pepper flakes"
         )
     )
 }

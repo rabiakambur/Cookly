@@ -35,7 +35,7 @@ fun FavoriteRecipesList(
             .background(BackgroundColor)
     ) {
         items(favoriteList) { recipe ->
-            FavoriteItem(
+            ExpandableCard(
                 favoriteRecipe = recipe,
                 onDeleteClick = {
                     onDeleteClick.invoke(recipe)
@@ -48,10 +48,21 @@ fun FavoriteRecipesList(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun FavoriteScreenPreview() {
-    FavoriteRecipesList(favoriteList = listOf(
-        RecipeEntity(
-        uid = 1, name = "çorba", image = "https://img.spoonacular.com/recipes/715415-312x231.jpg", isFavorite = true
-    ))){
+    FavoriteRecipesList(
+        favoriteList = listOf(
+            RecipeEntity(
+                uid = 1,
+                recipeTitle = "Asparagus and Pea Soup: Real Convenience Food",
+                recipeImage = "https://img.spoonacular.com/recipes/716406-312x231.jpg",
+                readyInMinutes = 5,
+                recipeServings = 8,
+                dishTypes = "meal",
+                recipeStep = "Add peas (the heat of the soup will quickly thaw them) and puree until smooth; add more until it reaches the thickness you like.Top with chives and a small dollop of creme fraiche or sour cream or greek yogurt.",
+                recipeIngredients = "salt and pepper, asparagus, broth, red pepper flakes",
+                isFavorite = true
+            )
+        )
+    ) {
 
     }
 }

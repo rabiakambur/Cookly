@@ -10,5 +10,20 @@ data class RecipesResult(
     val recipeTitle: String,
 
     @SerializedName("image")
-    val recipeImage: String
+    val recipeImage: String,
+
+    @SerializedName("readyInMinutes")
+    val recipeReadyInMinutes: Int,
+
+    @SerializedName("servings")
+    val recipeServings: Int,
+
+    @SerializedName("dishTypes")
+    val dishTypes: String,
+
+    @SerializedName("step")
+    val recipeStep: String,
+
+    @SerializedName("ingredients")
+    val recipeIngredients: String,
 )
