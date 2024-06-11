@@ -36,7 +36,7 @@ import com.rabiakambur.cookly.main.theme.CardColor
 
 @Composable
 fun FavoriteItem(
-    favoriteRecipe: FavoriteRecipeEntity,
+    state: FavoriteItemState,
     onDeleteClick: (FavoriteRecipeEntity) -> Unit
 ) {
     var shouldShowItemDeletionDialog by remember { mutableStateOf(false) }
@@ -64,7 +64,7 @@ fun FavoriteItem(
                 .padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 10.dp)
         ) {
             AsyncImage(
-                model = favoriteRecipe.recipeImage,
+                model = state.getRecipeImage(),
                 contentDescription = stringResource(R.string.content_description_recipe_image),
                 modifier = Modifier
                     .size(250.dp, 250.dp)
@@ -83,7 +83,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = favoriteRecipe.instructions.first().steps.mapNotNull { it.recipeIngredients.firstOrNull() }.map { it.name }.joinToString("\n"),
+                    text = state.getRecipeIngredientsAsFormatted(),
                     textAlign = TextAlign.Justify,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -100,7 +100,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = favoriteRecipe.instructions.first().steps.mapNotNull { it.recipeStep.firstOrNull() }.joinToString("\n"),
+                    text = state.getRecipeStepsAsFormatted(),
                     textAlign = TextAlign.Justify,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -124,27 +124,9 @@ fun FavoriteItem(
                 FavoriteItemDeletionDialog({
                     shouldShowItemDeletionDialog = it
                 }, {
-                    onDeleteClick(favoriteRecipe)
+                    onDeleteClick(state.favoriteRecipe)
                 })
             }
         }
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun FavoriteItemPreview() {
-    FavoriteItem(
-        favoriteRecipe = FavoriteRecipeEntity(
-            uid = 1,
-            recipeTitle = "Asparagus and Pea Soup: Real Convenience Food",
-            recipeImage = "https://img.spoonacular.com/recipes/716406-312x231.jpg",
-            readyInMinutes = 5,
-            recipeServings = 8,
-            dishTypes = listOf("Meal"),
-            instructions = listOf()
-        ),
-        onDeleteClick = {
-
-        })
 }

@@ -117,7 +117,7 @@ fun ExpandableCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     FavoriteItem(
-                        favoriteRecipe = favoriteRecipe,
+                        state = FavoriteItemState(favoriteRecipe = favoriteRecipe),
                         onDeleteClick = onDeleteClick
                     )
                 }
