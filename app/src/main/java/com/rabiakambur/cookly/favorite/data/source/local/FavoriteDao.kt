@@ -14,7 +14,7 @@ interface FavoriteDao {
     fun getFavoriteRecipes(): Flow<List<FavoriteRecipeEntity>>
 
     @Query("SELECT * FROM recipes WHERE :title = recipeTitle")
-    fun getFavoriteRecipeByTitle(title: String): FavoriteRecipeEntity?
+    suspend fun getFavoriteRecipeByTitle(title: String): FavoriteRecipeEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipe(favoriteRecipeEntity: FavoriteRecipeEntity)
