@@ -1,5 +1,6 @@
 package com.rabiakambur.cookly.home.di
 
+import com.rabiakambur.cookly.home.data.network.ApiKeyInterceptor
 import com.rabiakambur.cookly.home.data.source.remote.HomeService
 import dagger.Module
 import dagger.Provides
@@ -32,8 +33,17 @@ class HomeDataModule {
 
     @Provides
     @Singleton
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(apiKeyInterceptor: ApiKeyInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiKeyInterceptor(): ApiKeyInterceptor {
+        return ApiKeyInterceptor(
+            apiKey = "b58794c11d984f3796c46fe70516af79"
+        )
     }
 }
