@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 import com.rabiakambur.cookly.home.data.repository.HomeRepository
+import com.rabiakambur.cookly.main.util.Async
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,10 +21,10 @@ class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-    private val _recipesListFlow: MutableStateFlow<List<RecipesResult>> = MutableStateFlow(
-        listOf()
+    private val _state: MutableStateFlow<HomeState> = MutableStateFlow(
+        HomeState()
     )
-    val recipesListFlow: StateFlow<List<RecipesResult>> = _recipesListFlow
+    val state: StateFlow<HomeState> = _state
 
     init {
         fetchRecipes()
@@ -31,14 +32,35 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fetchRecipes() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                homeRepository
-                    .getAllRecipe()
-                    .collect {
-                        _recipesListFlow.value = it.results
+        viewModelScope.launch(Dispatchers.IO) {
+            homeRepository
+                .getAllRecipe()
+                .onEach {
+                    when (it) {
+                        is Async.Success -> {
+                            _state.value = HomeState(
+                                recipesList = it.data.results,
+                                isLoading = false,
+                                isError = false
+                            )
+                        }
+
+                        is Async.Loading -> {
+                            _state.value = HomeState(
+                                isLoading = true,
+                                isError = false
+                            )
+                        }
+
+                        else -> {
+                            _state.value = HomeState(
+                                isLoading = false,
+                                isError = true
+                            )
+                        }
                     }
-            }
+                }
+                .launchIn(this)
         }
     }
 
@@ -48,11 +70,12 @@ class HomeViewModel @Inject constructor(
                 .getFavoriteRecipes()
                 .onEach { favoriteRecipes ->
                     val titles = favoriteRecipes.map { it.recipeTitle }
-                    _recipesListFlow.value = _recipesListFlow.value.map {
+                    val updatedRecipesList = _state.value.recipesList.map {
                         it.copy(isFavorite = titles.contains(it.recipeTitle))
                     }
+                    _state.value = _state.value.copy(recipesList = updatedRecipesList)
                 }
-                .launchIn(viewModelScope)
+                .launchIn(this)
         }
     }
 
