@@ -23,12 +23,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.rabiakambur.cookly.R
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.main.theme.CardColor
 
@@ -63,7 +65,7 @@ fun FavoriteItem(
         ) {
             AsyncImage(
                 model = favoriteRecipe.recipeImage,
-                contentDescription = null,
+                contentDescription = stringResource(R.string.content_description_recipe_image),
                 modifier = Modifier
                     .size(250.dp, 250.dp)
             )
@@ -72,7 +74,7 @@ fun FavoriteItem(
                     .fillMaxSize()
             ) {
                 Text(
-                    text = "${favoriteRecipe.recipeTitle} Ingredients",
+                    text = stringResource(R.string.recipe_ingredients),
                     textAlign = TextAlign.Justify,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
@@ -89,7 +91,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = "How to Make ${favoriteRecipe.recipeTitle}",
+                    text = stringResource(R.string.recipe_preparation),
                     textAlign = TextAlign.Justify,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
@@ -98,7 +100,7 @@ fun FavoriteItem(
                         .padding(10.dp)
                 )
                 Text(
-                    text = favoriteRecipe.instructions.first().steps.map { it.recipeStep }.joinToString("\n"),
+                    text = favoriteRecipe.instructions.first().steps.mapNotNull { it.recipeStep.firstOrNull() }.joinToString("\n"),
                     textAlign = TextAlign.Justify,
                     fontSize = 14.sp,
                     color = Color.Black,
@@ -110,7 +112,7 @@ fun FavoriteItem(
             Icon(
                 tint = Color.Black,
                 imageVector = Icons.Filled.Delete,
-                contentDescription = null,
+                contentDescription = stringResource(R.string.content_description_delete_icon),
                 modifier = Modifier
                     .size(22.dp)
                     .align(Alignment.End)
@@ -128,7 +130,6 @@ fun FavoriteItem(
         }
     }
 }
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
