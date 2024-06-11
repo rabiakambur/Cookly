@@ -32,9 +32,11 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.rabiakambur.cookly.R
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.main.theme.BackgroundColor
 import com.rabiakambur.cookly.main.theme.PrimaryColor
@@ -102,7 +104,7 @@ fun ExpandableCard(
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowDown,
                             tint = PrimaryColor,
-                            contentDescription = null,
+                            contentDescription = stringResource(R.string.content_description_read_more_icon),
                             modifier = Modifier
                                 .align(Alignment.Center)
                         )

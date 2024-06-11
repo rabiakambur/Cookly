@@ -16,12 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _recipesListFlow: MutableStateFlow<List<RecipesResult>> = MutableStateFlow(
         listOf()
     )
-
     val recipesListFlow: StateFlow<List<RecipesResult>> = _recipesListFlow
 
     init {

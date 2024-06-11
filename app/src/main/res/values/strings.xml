@@ -3,4 +3,15 @@
     <string name="favorite_item_deletion_dialog_text">Are you sure you want to delete?</string>
     <string name="favorite_item_deletion_dialog_positive_button">Yes</string>
     <string name="favorite_item_deletion_dialog_negative_button">No</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_preparation">How to Make</string>
+    <string name="header_component">Let\'s Cook\nSomething Delicious</string>
+    <string name="search">Search</string>
+    <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="content_description_search_icon">Search Icon</string>
+    <string name="content_description_recipe_image">Recipe Image</string>
+    <string name="content_description_favorite_icon">Favorite Icon</string>
+    <string name="content_description_read_more_icon">Read More Icon</string>
+    <string name="content_description_delete_icon">Delete Icon</string>
+
 </resources>
