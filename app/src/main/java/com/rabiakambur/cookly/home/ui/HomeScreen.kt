@@ -31,7 +31,7 @@ fun HomeScreen(
             content = {
                 items(data) {
                     RecipeItem(it) { recipe ->
-                        homeViewModel.addRecipeToFavorite(recipe)
+                        homeViewModel.onFavoriteClick(recipe)
                     }
                 }
             }

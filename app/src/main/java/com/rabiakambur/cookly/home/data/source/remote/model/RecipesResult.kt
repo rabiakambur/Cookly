@@ -22,5 +22,7 @@ data class RecipesResult(
     val dishTypes: List<String>,
 
     @SerializedName("analyzedInstructions")
-    val analyzedInstructions: List<AnalyzedInstructionsResponse>
+    val analyzedInstructions: List<AnalyzedInstructionsResponse>,
+
+    val isFavorite: Boolean? = null
 )
