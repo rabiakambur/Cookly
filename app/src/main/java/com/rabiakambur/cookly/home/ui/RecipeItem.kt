@@ -48,7 +48,6 @@ fun RecipeItem(
     recipesResultResponse: RecipesResult,
     onRecipeFavoriteClick: (RecipesResult) -> Unit
 ) {
-    var isFavorite by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
@@ -69,12 +68,9 @@ fun RecipeItem(
 
             ) {
                 FavoriteIcon(
-                    isFavorite = isFavorite,
+                    isFavorite = recipesResultResponse.isFavorite ?: false,
                     onFavoriteClick = {
-                        if (!isFavorite) {
-                            onRecipeFavoriteClick.invoke(recipesResultResponse)
-                        }
-                        isFavorite = !isFavorite
+                        onRecipeFavoriteClick.invoke(recipesResultResponse)
                     }
                 )
             }
