@@ -19,6 +19,10 @@ Cookly is a recipe application where users can browse recipes in different categ
   <img src="images/4.png" alt="App Image" width="20%">
 </p>
 
+<div align="center">
+  <a href="https://github.com/rabiakambur/papara-bootcamp-final-case/raw/main/app-debug.apk">DOWNLOAD APK</a>
+</div>
+
 ## Introduction
 
 #### Dependencies Used
