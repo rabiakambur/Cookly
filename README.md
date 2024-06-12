@@ -11,6 +11,14 @@
 Cookly is a recipe application where users can browse recipes in different categories, get detailed information about recipes, and access their favorite recipes without being connected to the internet.  <br />
 </p>
 
+<br />
+<p align="center">
+  <img src="images/1.png" alt="App Image" width="20%">
+  <img src="images/2.png" alt="App Image" width="20%">
+  <img src="images/3.png" alt="App Image" width="20%">
+  <img src="images/4.png" alt="App Image" width="20%">
+</p>
+
 ## Introduction
 
 #### Dependencies Used
@@ -20,7 +28,6 @@ Cookly is a recipe application where users can browse recipes in different categ
 * [Room Database](https://developer.android.com/training/data-storage/room)
 * [Dependency Injection (Hilt)](https://developer.android.com/training/dependency-injection/hilt-android)
 * [Navigation Component](https://developer.android.com/develop/ui/compose/navigation)
-* [State Hoisting](https://developer.android.com/develop/ui/compose/state-hoisting)
 * [Flow](https://developer.android.com/kotlin/flow)
 * [Coil](https://github.com/coil-kt/coil#jetpack-compose)
 
