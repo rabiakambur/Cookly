@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rabiakambur.cookly.R
 import com.rabiakambur.cookly.home.ui.HomeViewModel
+import com.rabiakambur.cookly.main.theme.BackgroundColor
 import com.rabiakambur.cookly.main.theme.PrimaryColor
 
 @Composable
@@ -50,6 +51,7 @@ fun DetailScreen(
         Column(
             modifier = Modifier
                 .padding(top = innerPadding.calculateTopPadding())
+                .background(BackgroundColor)
         ) {
             DetailItem(state = state)
         }

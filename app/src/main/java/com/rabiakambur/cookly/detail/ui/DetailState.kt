@@ -20,7 +20,7 @@ data class DetailState(
             ?.analyzedInstructions
             ?.first()
             ?.steps
-            ?.mapNotNull { it.recipeStep.firstOrNull() }
+            ?.mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse.recipeStep}" }
             ?.joinToString("\n").orEmpty()
     }
 }

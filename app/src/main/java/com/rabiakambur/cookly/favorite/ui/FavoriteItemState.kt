@@ -24,7 +24,7 @@ data class FavoriteItemState(
             .instructions
             .first()
             .steps
-            .mapNotNull { it.recipeStep.firstOrNull() }
+            .mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse.recipeStep}" }
             .joinToString("\n")
     }
 }
