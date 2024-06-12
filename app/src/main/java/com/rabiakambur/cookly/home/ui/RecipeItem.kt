@@ -46,6 +46,7 @@ import com.rabiakambur.cookly.main.theme.PrimaryColor
 @Composable
 fun RecipeItem(
     recipesResultResponse: RecipesResult,
+    onRecipeClick: (RecipesResult) -> Unit,
     onRecipeFavoriteClick: (RecipesResult) -> Unit
 ) {
 
@@ -55,7 +56,9 @@ fun RecipeItem(
             .padding(all = 7.dp),
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         border = BorderStroke(2.dp, Color.Transparent),
-        onClick = {}
+        onClick = {
+            onRecipeClick.invoke(recipesResultResponse)
+        }
     ) {
         Box {
             Column {

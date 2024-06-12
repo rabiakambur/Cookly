@@ -13,5 +13,6 @@
     <string name="content_description_favorite_icon">Favorite Icon</string>
     <string name="content_description_read_more_icon">Read More Icon</string>
     <string name="content_description_delete_icon">Delete Icon</string>
+    <string name="recipe_detail">Recipe Detail</string>
 
 </resources>
