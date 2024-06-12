@@ -3,6 +3,7 @@ package com.rabiakambur.cookly.main.navigation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import com.rabiakambur.cookly.main.theme.CardColor
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
@@ -24,6 +26,11 @@ fun BottomNavigationBar(navController: NavHostController) {
             NavigationBarItem(
                 alwaysShowLabel = true,
                 icon = { Icon(item.icon, contentDescription = item.title) },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Color.Black,
+                    selectedTextColor = Color.Black,
+                    indicatorColor = CardColor
+                ),
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
