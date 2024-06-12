@@ -62,17 +62,17 @@ fun HomeScreen(
                 }
             )
             if (state.isLoading) {
-                Loading()
+                LoadingComponent()
             }
 
             if (state.isError) {
-                Error()
+                ErrorComponent()
             }
         }
     }
 }
 @Composable
-fun Loading() {
+fun LoadingComponent() {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -88,7 +88,7 @@ fun Loading() {
 }
 
 @Composable
-fun Error() {
+fun ErrorComponent() {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
