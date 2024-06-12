@@ -1,5 +1,6 @@
 package com.rabiakambur.cookly.home.ui
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rabiakambur.cookly.home.ui.component.HeaderComponent
@@ -21,7 +23,8 @@ import com.rabiakambur.cookly.main.theme.BackgroundColor
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(viewModelStoreOwner = LocalContext.current as ComponentActivity),
+    onRecipeClick: (String) -> Unit
 ) {
     val state by homeViewModel.state.collectAsState()
 
@@ -37,9 +40,15 @@ fun HomeScreen(
                 modifier = Modifier.background(BackgroundColor),
                 content = {
                     items(state.recipesList) {
-                        RecipeItem(it) { recipe ->
-                            homeViewModel.onFavoriteClick(recipe)
-                        }
+                        RecipeItem(
+                            recipesResultResponse = it,
+                            onRecipeClick = { recipe ->
+                                onRecipeClick.invoke(recipe.recipeId)
+                            },
+                            onRecipeFavoriteClick = { recipe ->
+                                homeViewModel.onFavoriteClick(recipe)
+                            }
+                        )
                     }
                 }
             )

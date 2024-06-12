@@ -1,7 +1,9 @@
 package com.rabiakambur.cookly.home.ui
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rabiakambur.cookly.detail.ui.DetailState
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 import com.rabiakambur.cookly.home.data.repository.HomeRepository
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val homeRepository: HomeRepository,
+    val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(
@@ -26,9 +29,19 @@ class HomeViewModel @Inject constructor(
     )
     val state: StateFlow<HomeState> = _state
 
+    private val _detailState: MutableStateFlow<DetailState> = MutableStateFlow(
+        DetailState(null)
+    )
+    val detailState: StateFlow<DetailState> = _detailState
+
     init {
         fetchRecipes()
         observeFavorites()
+    }
+
+    fun getRecipeById(id: String) {
+        val recipe = state.value.recipesList.find { it.recipeId == id }
+        _detailState.value = DetailState(recipesResult = recipe)
     }
 
     private fun fetchRecipes() {
