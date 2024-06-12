@@ -13,6 +13,9 @@
     <string name="content_description_favorite_icon">Favorite Icon</string>
     <string name="content_description_read_more_icon">Read More Icon</string>
     <string name="content_description_delete_icon">Delete Icon</string>
+    <string name="content_description_error">Error</string>
     <string name="recipe_detail">Recipe Detail</string>
+    <string name="error">An error has occurred. Please try again later.</string>
+    <string name="loading">Loading</string>
 
 </resources>
