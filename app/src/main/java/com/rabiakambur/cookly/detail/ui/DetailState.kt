@@ -11,8 +11,8 @@ data class DetailState(
             ?.analyzedInstructions
             ?.first()
             ?.steps
-            ?.mapNotNull { it.recipeIngredients.firstOrNull() }
-            ?.joinToString("\n") { it.name }.orEmpty()
+            ?.mapNotNull { it?.recipeIngredients?.firstOrNull() }
+            ?.joinToString("\n") { it.name.toString() }.orEmpty()
     }
 
     fun getRecipeStepsAsFormatted(): String {
@@ -20,7 +20,7 @@ data class DetailState(
             ?.analyzedInstructions
             ?.first()
             ?.steps
-            ?.mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse.recipeStep}" }
+            ?.mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse?.recipeStep}" }
             ?.joinToString("\n").orEmpty()
     }
 }

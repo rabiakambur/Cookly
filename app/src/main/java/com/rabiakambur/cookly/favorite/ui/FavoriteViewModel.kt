@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
 import com.rabiakambur.cookly.favorite.data.repository.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -25,7 +26,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun fetchAllFavorites() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getFavoriteRecipes().onEach {
                 _state.value = FavoriteState(favoriteList = it)
             }.launchIn(viewModelScope)
@@ -33,7 +34,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     fun deleteFavoriteRecipe(recipe: FavoriteRecipeEntity) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.delete(recipe)
         }
     }

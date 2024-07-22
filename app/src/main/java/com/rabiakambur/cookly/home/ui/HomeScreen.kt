@@ -48,11 +48,11 @@ fun HomeScreen(
                 contentPadding = PaddingValues(8.dp),
                 modifier = Modifier.background(BackgroundColor),
                 content = {
-                    items(state.recipesList) {
+                    items(state.recipesList?.mapNotNull { it }.orEmpty()) {
                         RecipeItem(
                             recipesResultResponse = it,
                             onRecipeClick = { recipe ->
-                                onRecipeClick.invoke(recipe.recipeId)
+                                onRecipeClick.invoke(recipe.recipeId.orEmpty())
                             },
                             onRecipeFavoriteClick = { recipe ->
                                 homeViewModel.onFavoriteClick(recipe)
@@ -71,6 +71,7 @@ fun HomeScreen(
         }
     }
 }
+
 @Composable
 fun LoadingComponent() {
     Box(
@@ -98,7 +99,7 @@ fun ErrorComponent() {
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box (
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
@@ -116,10 +117,8 @@ fun ErrorComponent() {
                     modifier = Modifier
                         .padding(top = 2.dp, bottom = 40.dp)
                         .align(Alignment.BottomCenter)
-
                 )
             }
-
         }
     }
 }

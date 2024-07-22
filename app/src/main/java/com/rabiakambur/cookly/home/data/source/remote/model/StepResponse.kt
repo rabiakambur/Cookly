@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class StepResponse(
     @SerializedName("step")
-    val recipeStep: String,
+    val recipeStep: String?,
 
     @SerializedName("ingredients")
-    val recipeIngredients: List<IngredientResponse>
+    val recipeIngredients: List<IngredientResponse?>?
 )

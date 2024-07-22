@@ -20,7 +20,7 @@ class HomeRepository @Inject constructor(
     suspend fun getAllRecipe(): Flow<Async<RecipesResponse>> {
         return flow<Async<RecipesResponse>> {
             val response = homeApi.getRecipes()
-            val updatedResults = updateRecipeFavorites(response.results)
+            val updatedResults = updateRecipeFavorites(response.results?.filterNotNull().orEmpty())
             emit(Async.Success(response.copy(results = updatedResults)))
         }.onStart {
             emit(Async.Loading())
@@ -31,7 +31,7 @@ class HomeRepository @Inject constructor(
 
     private suspend fun updateRecipeFavorites(recipes: List<RecipesResult>): List<RecipesResult> {
         return recipes.map { recipe ->
-            val isFavorite = isRecipeFavorite(recipe.recipeTitle)
+            val isFavorite = isRecipeFavorite(recipe.recipeTitle.orEmpty())
             recipe.copy(isFavorite = isFavorite)
         }
     }

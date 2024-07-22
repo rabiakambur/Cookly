@@ -1,12 +1,11 @@
 package com.rabiakambur.cookly.home.ui
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rabiakambur.cookly.detail.ui.DetailState
 import com.rabiakambur.cookly.favorite.data.source.local.FavoriteRecipeEntity
-import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 import com.rabiakambur.cookly.home.data.repository.HomeRepository
+import com.rabiakambur.cookly.home.data.source.remote.model.RecipesResult
 import com.rabiakambur.cookly.main.util.Async
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,14 +13,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeRepository: HomeRepository,
-    val savedStateHandle: SavedStateHandle
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(
@@ -39,11 +37,6 @@ class HomeViewModel @Inject constructor(
         observeFavorites()
     }
 
-    fun getRecipeById(id: String) {
-        val recipe = state.value.recipesList.find { it.recipeId == id }
-        _detailState.value = DetailState(recipesResult = recipe)
-    }
-
     private fun fetchRecipes() {
         viewModelScope.launch(Dispatchers.IO) {
             homeRepository
@@ -51,25 +44,31 @@ class HomeViewModel @Inject constructor(
                 .onEach {
                     when (it) {
                         is Async.Success -> {
-                            _state.value = HomeState(
-                                recipesList = it.data.results,
-                                isLoading = false,
-                                isError = false
-                            )
+                            _state.update { state ->
+                                state.copy(
+                                    recipesList = it.data.results,
+                                    isLoading = false,
+                                    isError = false
+                                )
+                            }
                         }
 
                         is Async.Loading -> {
-                            _state.value = HomeState(
-                                isLoading = true,
-                                isError = false
-                            )
+                            _state.update { state ->
+                                state.copy(
+                                    isLoading = true,
+                                    isError = false
+                                )
+                            }
                         }
 
                         else -> {
-                            _state.value = HomeState(
-                                isLoading = false,
-                                isError = true
-                            )
+                            _state.update { state ->
+                                state.copy(
+                                    isLoading = false,
+                                    isError = true
+                                )
+                            }
                         }
                     }
                 }
@@ -78,22 +77,31 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun observeFavorites() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             homeRepository
                 .getFavoriteRecipes()
                 .onEach { favoriteRecipes ->
                     val titles = favoriteRecipes.map { it.recipeTitle }
-                    val updatedRecipesList = _state.value.recipesList.map {
-                        it.copy(isFavorite = titles.contains(it.recipeTitle))
+                    val updatedRecipesList = state.value.recipesList?.map {
+                        it?.copy(isFavorite = titles.contains(it.recipeTitle))
                     }
-                    _state.value = _state.value.copy(recipesList = updatedRecipesList)
+                    _state.update { state ->
+                        state.copy(recipesList = updatedRecipesList)
+                    }
                 }
                 .launchIn(this)
         }
     }
 
+    fun getRecipeById(id: String) {
+        val recipe = state.value.recipesList?.find { it?.recipeId == id }
+        _detailState.update { state ->
+            state.copy(recipesResult = recipe)
+        }
+    }
+
     fun onFavoriteClick(recipesResult: RecipesResult) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             if (recipesResult.isFavorite == true) {
                 removeRecipeFromFavorite(recipesResult)
             } else {
@@ -103,26 +111,26 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun addRecipeToFavorite(recipesResult: RecipesResult) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             homeRepository.addRecipeToFavorite(
                 favoriteRecipeEntity = FavoriteRecipeEntity(
                     uid = 0,
-                    recipeImage = recipesResult.recipeImage,
-                    recipeTitle = recipesResult.recipeTitle,
-                    readyInMinutes = recipesResult.recipeReadyInMinutes,
-                    recipeServings = recipesResult.recipeServings,
-                    dishTypes = recipesResult.dishTypes,
-                    instructions = recipesResult.analyzedInstructions
+                    recipeImage = recipesResult.recipeImage.orEmpty(),
+                    recipeTitle = recipesResult.recipeTitle.orEmpty(),
+                    readyInMinutes = recipesResult.recipeReadyInMinutes ?: 0,
+                    recipeServings = recipesResult.recipeServings ?: 0,
+                    dishTypes = recipesResult.dishTypes?.filterNotNull().orEmpty(),
+                    instructions = recipesResult.analyzedInstructions?.filterNotNull().orEmpty()
                 )
             )
         }
     }
 
     private fun removeRecipeFromFavorite(recipesResult: RecipesResult) {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
+            recipesResult.recipeTitle?.let {
                 homeRepository
-                    .deleteRecipeByTitle(recipesResult.recipeTitle)
+                    .deleteRecipeByTitle(it)
             }
         }
     }

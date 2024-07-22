@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class IngredientResponse(
     @SerializedName("name")
-    val name: String
+    val name: String?
 )

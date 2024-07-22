@@ -4,25 +4,25 @@ import com.google.gson.annotations.SerializedName
 
 data class RecipesResult(
     @SerializedName("id")
-    val recipeId: String,
+    val recipeId: String?,
 
     @SerializedName("title")
-    val recipeTitle: String,
+    val recipeTitle: String?,
 
     @SerializedName("image")
-    val recipeImage: String,
+    val recipeImage: String?,
 
     @SerializedName("readyInMinutes")
-    val recipeReadyInMinutes: Int,
+    val recipeReadyInMinutes: Int?,
 
     @SerializedName("servings")
-    val recipeServings: Int,
+    val recipeServings: Int?,
 
     @SerializedName("dishTypes")
-    val dishTypes: List<String>,
+    val dishTypes: List<String?>?,
 
     @SerializedName("analyzedInstructions")
-    val analyzedInstructions: List<AnalyzedInstructionsResponse>,
+    val analyzedInstructions: List<AnalyzedInstructionsResponse?>?,
 
     val isFavorite: Boolean? = null
 )

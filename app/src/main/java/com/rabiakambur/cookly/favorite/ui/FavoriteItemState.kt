@@ -15,8 +15,8 @@ data class FavoriteItemState(
             .instructions
             .first()
             .steps
-            .mapNotNull { it.recipeIngredients.firstOrNull() }
-            .joinToString("\n") { it.name }
+            ?.mapNotNull { it?.recipeIngredients?.firstOrNull() }
+            ?.joinToString("\n") { it.name.toString() }.orEmpty()
     }
 
     fun getRecipeStepsAsFormatted(): String {
@@ -24,7 +24,7 @@ data class FavoriteItemState(
             .instructions
             .first()
             .steps
-            .mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse.recipeStep}" }
-            .joinToString("\n")
+            ?.mapIndexed { index, stepResponse -> "${index + 1}. ${stepResponse?.recipeStep}" }
+            ?.joinToString("\n").orEmpty()
     }
 }
