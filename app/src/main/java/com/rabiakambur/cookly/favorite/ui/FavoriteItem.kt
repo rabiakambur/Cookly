@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -73,40 +72,27 @@ fun FavoriteItem(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                Text(
+                ReusableText(
                     text = stringResource(R.string.recipe_ingredients),
-                    textAlign = TextAlign.Justify,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(10.dp)
+                    fontSize = 14,
+                    fontWeight = FontWeight.Bold
                 )
-                Text(
+                ReusableText(
                     text = state.getRecipeIngredientsAsFormatted(),
-                    textAlign = TextAlign.Justify,
-                    fontSize = 14.sp,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(10.dp)
+                    fontSize = 14,
+                    fontWeight = FontWeight.Normal
                 )
-                Text(
+                ReusableText(
                     text = stringResource(R.string.recipe_preparation),
-                    textAlign = TextAlign.Justify,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(10.dp)
+                    fontSize = 16,
+                    fontWeight = FontWeight.Bold
                 )
-                Text(
+                ReusableText(
                     text = state.getRecipeStepsAsFormatted(),
-                    textAlign = TextAlign.Justify,
-                    fontSize = 14.sp,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(10.dp)
+                    fontSize = 14,
+                    fontWeight = FontWeight.Normal
                 )
+
             }
 
             Icon(
@@ -129,4 +115,24 @@ fun FavoriteItem(
             }
         }
     }
+}
+
+@Composable
+fun ReusableText(
+    text: String,
+    fontSize: Int,
+    modifier: Modifier = Modifier,
+    fontWeight: FontWeight,
+    color: Color = Color.Black,
+    textAlign: TextAlign = TextAlign.Justify
+) {
+    Text(
+        text = text,
+        textAlign = textAlign,
+        fontSize = fontSize.sp,
+        fontWeight = fontWeight,
+        color = color,
+        modifier = modifier
+            .padding(10.dp)
+    )
 }

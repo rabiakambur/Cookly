@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,56 +38,73 @@ fun DetailItem(
             modifier = Modifier
                 .size(300.dp, 300.dp)
         )
-        Text(
+
+        ReusableText(
             text = "${state.recipesResult?.recipeTitle}",
-            textAlign = TextAlign.Center,
-            fontSize = 24.sp,
+            fontSize = 24,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black,
-            modifier = Modifier
-                .padding(10.dp)
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(10.dp)
         )
 
-        Text(
+        ReusableText(
             text = stringResource(R.string.recipe_ingredients),
+            fontSize = 24,
             textAlign = TextAlign.Start,
-            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black,
             modifier = Modifier
-                .padding(10.dp)
                 .align(Alignment.Start)
         )
-        Text(
+
+        ReusableText(
             text = state.getRecipeIngredientsAsFormatted(),
+            fontSize = 16,
             textAlign = TextAlign.Justify,
-            fontSize = 14.sp,
-            color = Color.Black,
+            fontWeight = FontWeight.Normal,
             modifier = Modifier
-                .padding(10.dp)
                 .align(Alignment.Start)
         )
-        Text(
+
+        ReusableText(
             text = stringResource(R.string.recipe_preparation),
-            textAlign = TextAlign.Justify,
-            fontSize = 24.sp,
+            fontSize = 24,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black,
-            modifier = Modifier
-                .padding(10.dp)
-                .align(Alignment.Start)
-        )
-        Text(
-            text = state.getRecipeStepsAsFormatted(),
             textAlign = TextAlign.Justify,
-            fontSize = 14.sp,
-            color = Color.Black,
             modifier = Modifier
-                .padding(10.dp)
+                .align(Alignment.Start)
+
+        )
+
+        ReusableText(
+            text = state.getRecipeStepsAsFormatted(),
+            fontSize = 16,
+            textAlign = TextAlign.Justify,
+            fontWeight = FontWeight.Normal,
+            modifier = Modifier
                 .align(Alignment.Start)
         )
+
     }
+}
+
+@Composable
+fun ReusableText(
+    text: String,
+    fontSize: Int,
+    modifier: Modifier = Modifier,
+    fontWeight: FontWeight,
+    style: TextStyle = MaterialTheme.typography.bodyLarge,
+    color: Color = Color.Black,
+    textAlign: TextAlign = TextAlign.Justify
+) {
+    Text(
+        text = text,
+        textAlign = textAlign,
+        fontSize = fontSize.sp,
+        fontWeight = fontWeight,
+        style = style,
+        color = color,
+        modifier = modifier
+            .padding(10.dp)
+    )
 }
