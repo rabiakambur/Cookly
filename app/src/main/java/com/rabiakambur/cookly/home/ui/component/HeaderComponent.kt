@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,10 +46,9 @@ fun HeaderComponent() {
         ) {
             Text(
                 text = stringResource(R.string.header_component),
-                fontSize = 24.sp,
+                fontSize = 26.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Monospace,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier
                     .padding(top = 14.dp, bottom = 24.dp)

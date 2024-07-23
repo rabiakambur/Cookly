@@ -15,7 +15,7 @@ import com.rabiakambur.cookly.home.ui.HomeScreen
 fun NavigationScreens(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    navActions: NavigationActions = remember(navController){
+    navActions: NavigationActions = remember(navController) {
         NavigationActions(navController)
     }
 ) {
@@ -25,17 +25,22 @@ fun NavigationScreens(
         ) {
             HomeScreen() {
                 navActions.navigateToDetail(it)
-        } }
+            }
+        }
 
         composable(
             NavItem.Favorite.path
         ) {
-            FavoriteScreen() }
+            FavoriteScreen()
+        }
 
         composable(
             NavItem.Detail.path
         ) { arguments ->
             val id = arguments.arguments?.getString("id") ?: "0"
-            DetailScreen(id) }
+            DetailScreen(
+                id,
+                navigateBack = { navController.popBackStack() })
+        }
     }
 }
