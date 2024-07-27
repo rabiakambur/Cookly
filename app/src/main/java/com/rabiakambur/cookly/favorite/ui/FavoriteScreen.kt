@@ -38,6 +38,7 @@ fun FavoriteScreen(
     favoriteViewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val state by favoriteViewModel.state.collectAsState()
+
     Scaffold(
         topBar = {
             TopBar()

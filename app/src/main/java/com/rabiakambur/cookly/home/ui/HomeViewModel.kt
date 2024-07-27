@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -25,7 +26,7 @@ class HomeViewModel @Inject constructor(
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(
         HomeState()
     )
-    val state: StateFlow<HomeState> = _state
+    val state: StateFlow<HomeState> = _state.asStateFlow()
 
     private val _detailState: MutableStateFlow<DetailState> = MutableStateFlow(
         DetailState(null)
@@ -47,6 +48,7 @@ class HomeViewModel @Inject constructor(
                             _state.update { state ->
                                 state.copy(
                                     recipesList = it.data.results,
+                                    filteredRecipesList = it.data.results,
                                     isLoading = false,
                                     isError = false
                                 )
@@ -132,6 +134,17 @@ class HomeViewModel @Inject constructor(
                 homeRepository
                     .deleteRecipeByTitle(it)
             }
+        }
+    }
+
+    fun searchRecipes(query: String) {
+        val filteredRecipes = state.value.recipesList?.filter {
+            it?.recipeTitle?.contains(query, ignoreCase = true) == true
+        }
+        _state.update { state ->
+            state.copy(
+                filteredRecipesList = filteredRecipes
+            )
         }
     }
 }

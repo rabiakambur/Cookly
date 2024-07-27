@@ -38,7 +38,14 @@ fun HomeScreen(
     val state by homeViewModel.state.collectAsState()
 
     Column {
-        HeaderComponent()
+        HeaderComponent(
+            onSearchClicked = {
+                homeViewModel.searchRecipes(it)
+            },
+            onClear = {
+                homeViewModel.searchRecipes("")
+            }
+        )
 
         Box(
             modifier = Modifier.fillMaxSize()
@@ -48,7 +55,7 @@ fun HomeScreen(
                 contentPadding = PaddingValues(8.dp),
                 modifier = Modifier.background(BackgroundColor),
                 content = {
-                    items(state.recipesList?.mapNotNull { it }.orEmpty()) {
+                    items(state.filteredRecipesList?.mapNotNull { it }.orEmpty()) {
                         RecipeItem(
                             recipesResultResponse = it,
                             onRecipeClick = { recipe ->

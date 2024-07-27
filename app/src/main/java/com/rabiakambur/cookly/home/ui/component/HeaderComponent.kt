@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rabiakambur.cookly.R
@@ -24,7 +23,10 @@ import com.rabiakambur.cookly.main.theme.PrimaryColor
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HeaderComponent() {
+fun HeaderComponent(
+    onSearchClicked: (String) -> Unit,
+    onClear: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,13 +55,10 @@ fun HeaderComponent() {
                 modifier = Modifier
                     .padding(top = 14.dp, bottom = 24.dp)
             )
-            SearchComponent()
+            SearchComponent(
+                onSearchClicked = onSearchClicked,
+                onClear = onClear
+            )
         }
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun HeaderComponentPreview() {
-    HeaderComponent()
 }
