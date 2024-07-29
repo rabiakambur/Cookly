@@ -88,7 +88,10 @@ class HomeViewModel @Inject constructor(
                         it?.copy(isFavorite = titles.contains(it.recipeTitle))
                     }
                     _state.update { state ->
-                        state.copy(recipesList = updatedRecipesList)
+                        state.copy(
+                            recipesList = updatedRecipesList,
+                            filteredRecipesList = updatedRecipesList
+                        )
                     }
                 }
                 .launchIn(this)
