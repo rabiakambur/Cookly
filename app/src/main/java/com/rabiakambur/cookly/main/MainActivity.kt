@@ -7,9 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowCompat
+import com.rabiakambur.cookly.home.work.RecipeNotificationScheduler
 import com.rabiakambur.cookly.main.theme.CooklyTheme
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,5 +23,6 @@ class MainActivity : ComponentActivity() {
                 window.statusBarColor = Color(0xFFff9505).toArgb()
             }
         }
+        RecipeNotificationScheduler.scheduleRecipeNotification(this)
     }
 }

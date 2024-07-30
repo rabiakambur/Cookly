@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.hilt.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -89,5 +90,10 @@ dependencies {
     // dagger hilt
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.compose)
+    implementation(libs.androidx.hilt.work)
     kapt(libs.dagger.hilt.compiler)
+    kapt(libs.androidx.hilt.compiler)
+
+    // work manager
+    implementation(libs.work.manager)
 }
